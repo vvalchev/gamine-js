@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="196x196" href="images/favicon-196.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="images/apple-icon-167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120.png">
+
+    <title>Gamine in JavaScript</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Arima+Madurai:400,700&display=swap");
+      html, body { height: 100%; width: 100%; font-family: "Arima Madurai", sans-serif }
+      #help { float: right; text-align: right; margin: 0 1em }
+    </style>
+</head>
+  <body onkeypress="keyPress(event)">
+    <canvas id="myCanvas" onmousemove="mouseMove(event)">
+      Get a decent browser, pal!
+    </canvas>
+    <!-- audio player -->
+    <script>(function(d, s){if(!window.rel){s = d.createElement("script");s.type = "text/javascript";s.async = true;s.id = "radio-de-embedded";s.src = "//www.radio.net/inc/microsite/js/full.js";d.getElementsByTagName("head")[0].appendChild(s);window.rel = true;}}(document));</script><div class="ng-app-embedded"><div ui-view class="microsite embedded-radio-player" data-playerwidth="340px" data-playertype="web_embedded" data-playstation="calmlullaby" data-autoplay="true" data-apikey="df04ff67dd3339a6fc19c9b8be164d5b5245ae93"></div></div><noscript><a href="https://www.radio.net/s/calmlullaby" target="_blank">CALM RADIO - Lullaby on radio.net</a></noscript>
+    <!-- help text -->
+    <div id="help">
+      <p>Move mouse around, click to draw. Hit a key to type a letter. Space to clear.</p>
+      <small>Inspired by <a href="https://sourceforge.net/projects/gamine-game/">Gamine</a></small>
+    </div>
+
+
+    <script>
+    const ROTATE_COLOR_MILLIS = 100;
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var currentX = -1;
+    var currentY = -1;
+    var color = generateColor();
+    var rotateColorLast = Date.now();
+
+    // resize to full width
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 100;
+
+    // some utility functions
+    function rgb(r, g, b){
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function rnd(max) {
+      return Math.floor( Math.random() * max );
+    }
+
+    // color functions
+    function generateColor() {
+      const r = Math.random;
+      return rgb(
+        r() * 128 + 127,
+        r() * 128 + 127,
+        r() * 128 + 127);
+    }
+
+    function getRandomColor() {
+      var n = Date.now();
+      if (n - rotateColorLast > ROTATE_COLOR_MILLIS) {
+        color = generateColor()
+        rotateColorLast = n;
+      }
+      return color;
+    }
+
+    // draw functions
+    function drawString(x, y, s, font = "30px Arima Madurai") {
+      if (currentX <= 0 && currentY <= 0) {
+        return;
+      }
+      ctx.beginPath();
+      ctx.strokeStyle = ctx.fillStyle = getRandomColor();
+      ctx.textAlign = "center";
+      ctx.font = "3em Arima Madurai";
+      ctx.fillText(s, x, y);
+    }
+
+    function drawLine(cx,cy,ox,oy) {
+      ctx.beginPath();
+      ctx.strokeStyle = getRandomColor();
+      ctx.lineWidth = 10;
+      ctx.lineCap = "round";
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(ox, oy);
+      ctx.stroke();
+    }
+
+    function drawSign(x, y) {
+      var symbols = [
+        '\u{1F577}', //spider
+        '\u{1F415}', //dog
+        '\u{1F408}', //cat
+        '\u{1F41F}', //fish
+        '\u{1F43F}', //squirell
+        '\u{1F426}', //bird
+        '\u{1F698}', //car
+        '\u{1F694}', //police
+        '\u{1F6E9}', //airplane
+      ];
+      drawString(x, y, symbols[rnd(symbols.length)], "6em Webdings");
+    }
+
+    function clear() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // event handlers
+    function keyPress(e) {
+      e.preventDefault(); // consume event here
+      switch(e.key) {
+        case ' ':
+          clear();
+          break;
+        case 'Enter':
+          drawSign(currentX, currentY);
+          break;
+        default:
+          drawString(currentX, currentY, e.key);
+      }
+    }
+
+    function mouseMove(e) {
+      let ox = currentX;
+      let oy = currentY;
+      currentX = e.layerX;
+      currentY = e.layerY;
+
+      if (0 != e.buttons) {
+        drawLine(currentX, currentY, ox, oy);
+        if (rnd(512) == 17) drawSign();
+      }
+    }
+
+    </script>
+
+
+</body></html>
