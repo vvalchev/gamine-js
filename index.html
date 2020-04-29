@@ -24,6 +24,7 @@
     body {
       height: 100%;
       width: 100%;
+      margin: 0;
       font-family: "Arima Madurai", sans-serif
     }
 
@@ -70,10 +71,7 @@
     var currentY = -1;
     var color = generateColor();
     var rotateColorLast = Date.now();
-
-    // resize to full width
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 100;
+    resizeCanvas();
 
     // some utility functions
     function rgb(r, g, b) {
@@ -82,6 +80,11 @@
 
     function rnd(max) {
       return Math.floor(Math.random() * max);
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight - 100;
     }
 
     // color functions
@@ -194,13 +197,13 @@
       });
     }, false);
 
+    window.addEventListener('resize', resizeCanvas, false)
 
     // the service worker required for the PWA app
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
   </script>
-
 
 </body>
 
