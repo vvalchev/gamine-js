@@ -170,12 +170,20 @@
       }
     }
 
+    const DOUBLE_TOUCH_DIFF = 400;
+    var lastTouch = 0;
     canvas.addEventListener('touchstart', function(event) {
+      event.preventDefault();
       var touch = event.touches[event.touches.length - 1];
       currentX = touch.pageX;
       currentY = touch.pageY;
+      // detect double touch
+      var diff = event.timeStamp - lastTouch;
+      lastTouch = event.timeStamp;
+      if (diff < DOUBLE_TOUCH_DIFF) {
+        clear();
+      }
     });
-
 
     canvas.addEventListener('touchmove', function(event) {
       event.preventDefault();
