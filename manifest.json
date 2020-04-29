@@ -4,7 +4,7 @@
   "theme_color": "#2196f3",
   "background_color": "#fdfdfd",
   "display": "fullscreen",
-  "start_url": "/index.html",
+  "start_url": "/gamine-js/index.html",
   "icons": [
     {
       "src": "images/manifest-icon-192.png",
