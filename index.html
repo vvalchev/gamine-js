@@ -170,6 +170,23 @@
       }
     }
 
+    canvas.addEventListener('touchstart', function(event) {
+      var touch = event.touches[event.touches.length - 1];
+      currentX = touch.pageX;
+      currentY = touch.pageY;
+    });
+
+
+    canvas.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+      var touch = event.touches[event.touches.length - 1];
+      mouseMove({
+        layerX: touch.pageX,
+        layerY: touch.pageY
+      });
+    }, false);
+
+
     // the service worker required for the PWA app
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
