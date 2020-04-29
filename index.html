@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
+    <meta name="theme-color" content="#2196f3">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="msapplication-starturl" content="/">
@@ -30,7 +31,6 @@
       <p>Move mouse around, click to draw. Hit a key to type a letter. Space to clear.</p>
       <small>Inspired by <a href="https://sourceforge.net/projects/gamine-game/">Gamine</a></small>
     </div>
-
 
     <script>
     const ROTATE_COLOR_MILLIS = 100;
@@ -140,6 +140,9 @@
       }
     }
 
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
     </script>
 
 
