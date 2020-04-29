@@ -1,38 +1,68 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="utf-8">
-    <meta name="theme-color" content="#2196f3">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="msapplication-starturl" content="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html lang="en">
 
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="196x196" href="images/favicon-196.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="images/apple-icon-167.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120.png">
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#2196f3">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="msapplication-starturl" content="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Gamine in JavaScript</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css?family=Arima+Madurai:400,700&display=swap");
-      html, body { height: 100%; width: 100%; font-family: "Arima Madurai", sans-serif }
-      #help { float: right; text-align: right; margin: 0 1em }
-    </style>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="196x196" href="images/favicon-196.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="images/apple-icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120.png">
+
+  <title>Gamine in JavaScript</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Arima+Madurai:400,700&display=swap");
+
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      font-family: "Arima Madurai", sans-serif
+    }
+
+    #help {
+      float: right;
+      text-align: right;
+      margin: 0 1em
+    }
+  </style>
 </head>
-  <body onkeypress="keyPress(event)">
-    <canvas id="myCanvas" onmousemove="mouseMove(event)">
-      Get a decent browser, pal!
-    </canvas>
-    <!-- audio player -->
-    <script>(function(d, s){if(!window.rel){s = d.createElement("script");s.type = "text/javascript";s.async = true;s.id = "radio-de-embedded";s.src = "//www.radio.net/inc/microsite/js/full.js";d.getElementsByTagName("head")[0].appendChild(s);window.rel = true;}}(document));</script><div class="ng-app-embedded"><div ui-view class="microsite embedded-radio-player" data-playerwidth="340px" data-playertype="web_embedded" data-playstation="calmlullaby" data-autoplay="true" data-apikey="df04ff67dd3339a6fc19c9b8be164d5b5245ae93"></div></div><noscript><a href="https://www.radio.net/s/calmlullaby" target="_blank">CALM RADIO - Lullaby on radio.net</a></noscript>
-    <!-- help text -->
-    <div id="help">
-      <p>Move mouse around, click to draw. Hit a key to type a letter. Space to clear.</p>
-      <small>Inspired by <a href="https://sourceforge.net/projects/gamine-game/">Gamine</a></small>
-    </div>
 
-    <script>
+<body onkeypress="keyPress(event)">
+  <canvas id="myCanvas" onmousemove="mouseMove(event)">
+    Get a decent browser, pal!
+  </canvas>
+  <!-- audio player -->
+  <script>
+    (function(d, s) {
+      if (!window.rel) {
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.id = "radio-de-embedded";
+        s.src = "//www.radio.net/inc/microsite/js/full.js";
+        d.getElementsByTagName("head")[0].appendChild(s);
+        window.rel = true;
+      }
+    }(document));
+  </script>
+  <div class="ng-app-embedded">
+    <div ui-view class="microsite embedded-radio-player" data-playerwidth="340px" data-playertype="web_embedded" data-playstation="calmlullaby" data-autoplay="true" data-apikey="df04ff67dd3339a6fc19c9b8be164d5b5245ae93"></div>
+  </div><noscript><a href="https://www.radio.net/s/calmlullaby" target="_blank">CALM RADIO - Lullaby on radio.net</a></noscript>
+  <!-- help text -->
+  <div id="help">
+    <p>Move mouse around, click to draw. Hit a key to type a letter. Space to clear.</p>
+    <small>Inspired by <a href="https://sourceforge.net/projects/gamine-game/">Gamine</a></small>
+  </div>
+
+  <script>
     const ROTATE_COLOR_MILLIS = 100;
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
@@ -46,12 +76,12 @@
     canvas.height = window.innerHeight - 100;
 
     // some utility functions
-    function rgb(r, g, b){
+    function rgb(r, g, b) {
       return `rgb(${r}, ${g}, ${b})`;
     }
 
     function rnd(max) {
-      return Math.floor( Math.random() * max );
+      return Math.floor(Math.random() * max);
     }
 
     // color functions
@@ -84,7 +114,7 @@
       ctx.fillText(s, x, y);
     }
 
-    function drawLine(cx,cy,ox,oy) {
+    function drawLine(cx, cy, ox, oy) {
       ctx.beginPath();
       ctx.strokeStyle = getRandomColor();
       ctx.lineWidth = 10;
@@ -116,7 +146,7 @@
     // event handlers
     function keyPress(e) {
       e.preventDefault(); // consume event here
-      switch(e.key) {
+      switch (e.key) {
         case ' ':
           clear();
           break;
@@ -140,10 +170,13 @@
       }
     }
 
+    // the service worker required for the PWA app
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
-    </script>
+  </script>
 
 
-</body></html>
+</body>
+
+</html>
