@@ -12,3 +12,4 @@ The child uses the mouse to draw coloured dots and lines on the screen.
 * https://sourceforge.net/projects/gamine-game/ for the original inspiration.
 * https://hatchful.shopify.com/ for the beautiful logo.
 * https://github.com/NDISCOVER/Arima-Font for the gorgeous font.
+* https://calmradio.com/ for the lullaby music.

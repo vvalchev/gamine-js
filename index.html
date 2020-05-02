@@ -4,28 +4,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="theme-color" content="#2196f3">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- pwa -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="msapplication-starturl" content="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="196x196" href="images/favicon-196.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180.png">
   <link rel="apple-touch-icon" sizes="167x167" href="images/apple-icon-167.png">
   <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152.png">
   <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120.png">
+  <!-- seo -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Gamine/JS" />
+  <meta property="og:site_name" content="Gamine/JS" />
+  <meta property="og:url" content="https://vvalchev.github.io/gamin-js/" />
+  <meta property="og:description" content="Gamine/JS is a game for the very youngest population, that are just discovering the computer and how to move the mouse around and hit some keys on the keyboard. The child uses the mouse to draw coloured dots and lines on the screen." />
+  <meta name="description" content="Gamine/JS is a game for the very youngest population, that are just discovering the computer and how to move the mouse around and hit some keys on the keyboard. The child uses the mouse to draw coloured dots and lines on the screen." />
+
 
   <title>Gamine in JavaScript</title>
+  <link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css?family=Arima+Madurai:400,700&display=swap" >
   <style>
-    @import url("https://fonts.googleapis.com/css?family=Arima+Madurai:400,700&display=swap");
-
     html,
     body {
       height: 100%;
       width: 100%;
       margin: 0;
-      font-family: "Arima Madurai", sans-serif
+      font-family: "Arima Madurai", sans-serif;
+      text-shadow: 4px 4px 4px #aaa;
     }
 
     #help {
@@ -41,22 +50,9 @@
     Get a decent browser, pal!
   </canvas>
   <!-- audio player -->
-  <script>
-    (function(d, s) {
-      if (!window.rel) {
-        s = d.createElement("script");
-        s.type = "text/javascript";
-        s.async = true;
-        s.id = "radio-de-embedded";
-        s.src = "//www.radio.net/inc/microsite/js/full.js";
-        d.getElementsByTagName("head")[0].appendChild(s);
-        window.rel = true;
-      }
-    }(document));
-  </script>
-  <div class="ng-app-embedded">
-    <div ui-view class="microsite embedded-radio-player" data-playerwidth="340px" data-playertype="web_embedded" data-playstation="calmlullaby" data-autoplay="true" data-apikey="df04ff67dd3339a6fc19c9b8be164d5b5245ae93"></div>
-  </div><noscript><a href="https://www.radio.net/s/calmlullaby" target="_blank">CALM RADIO - Lullaby on radio.net</a></noscript>
+  <audio controls>
+    <source src="http://streams.calmradio.com/api/1024/128/stream/;.m3u" type="audio/mpeg">
+  </audio>
   <!-- help text -->
   <div id="help">
     <p>Move mouse around, click to draw. Hit a key to type a letter. Space to clear.</p>
