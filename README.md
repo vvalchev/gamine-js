@@ -1,4 +1,4 @@
-<img src="images/logo_transparent.png" style="float: right; width: 200px" />
+<img src="images/logo_transparent.png" width="200" align="right" />
 
 # About
 Gamine/JS is a game for the very youngest population, that are just discovering
