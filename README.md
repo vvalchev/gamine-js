@@ -13,3 +13,4 @@ The child uses the mouse to draw coloured dots and lines on the screen.
 * https://hatchful.shopify.com/ for the beautiful logo.
 * https://github.com/NDISCOVER/Arima-Font for the gorgeous font.
 * https://calmradio.com/ for the lullaby music.
+* https://store.kde.org/content/show.php/Chameleon+Xcursors?content=38459 for the pencil cursor.
